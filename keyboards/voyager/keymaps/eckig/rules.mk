@@ -3,11 +3,10 @@
 CONSOLE_ENABLE = no
 COMMAND_ENABLE = no
 MOUSEKEY_ENABLE = no
-RGB_MATRIX_CUSTOM_KB = yes
+RGB_MATRIX_CUSTOM_KB = no
 SPACE_CADET_ENABLE = no
 CAPS_WORD_ENABLE = yes
 TAP_DANCE_ENABLE = no
 REPEAT_KEY_ENABLE = yes
-SRC = matrix.c
 SRC += features/custom_shift_keys.c
 SRC += features/achordion.c
