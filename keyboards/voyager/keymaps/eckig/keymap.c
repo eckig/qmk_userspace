@@ -3,7 +3,6 @@
 #include "keymap_german.h"
 #include "sendstring_german.h"
 #include "features/custom_shift_keys.h"
-#include "features/achordion.h"
 
 // super alt-tab
 bool is_alt_tab_active = false;
@@ -70,7 +69,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
-  if (!process_achordion(keycode, record)) { return false; }
   if (!process_custom_shift_keys(keycode, record)) { return false; }
 
   switch (keycode) {
@@ -133,7 +131,6 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 }
 
 void matrix_scan_user(void) {
-  achordion_task();
   if (is_alt_tab_active) {
     if (timer_elapsed(alt_tab_timer) > 600) {
       unregister_code(KC_LALT);
@@ -143,7 +140,7 @@ void matrix_scan_user(void) {
 }
 
 uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
-  // If you quickly hold a tap-hold key after tapping it, the tap action is repeated. 
+  // If you quickly hold a tap-hold key after tapping it, the tap action is repeated.
   switch (keycode) {
     case LT1_ENTER:
     case LT1_DELETE:
@@ -157,46 +154,3 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   }
 }
 
-bool achordion_eager_mod(uint8_t mod) {
-  switch (mod) {
-    case MOD_LSFT:
-    case MOD_LCTL:
-      return true;  // Eagerly apply Shift and Ctrl mods on left side.
-    default:
-      return false;
-  }
-}
-
-extern rgb_config_t rgb_matrix_config;
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-
-  uint8_t layer = get_highest_layer(layer_state);
-  float f = (float) rgb_matrix_config.hsv.v / UINT8_MAX;
-
-  for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-    for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-
-      uint8_t index = g_led_config.matrix_co[row][col];
-      if (index >= led_min && index < led_max && index != NO_LED) {
-
-        uint16_t keycode = keymap_key_to_keycode(layer, (keypos_t){col,row});
-        if (layer <= 0 || keycode <= KC_TRNS) {
-          rgb_matrix_set_color(index, 0, 0, 0);
-        }
-        else if(IS_QK_MOD_TAP(keycode) || keycode == QK_REP || keycode == LT3_C ) {
-          rgb_matrix_set_color(index, f * 255, f * 136, f * 0);
-        }
-        else if(keycode == LT1_ENTER || keycode == LT1_DELETE) {
-          rgb_matrix_set_color(index, 0, f * 255, f * 127);
-        }
-        else if(keycode == LT2_SPACE || keycode == LT2_BSPC || layer > 1) {
-          rgb_matrix_set_color(index, 0, f * 128, f * 128);
-        }
-        else {
-          rgb_matrix_set_color(index, 0, f * 255, f * 127);
-        }
-      }
-    }
-  }
-  return false;
-}

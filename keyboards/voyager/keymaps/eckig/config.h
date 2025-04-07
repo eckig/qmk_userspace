@@ -5,12 +5,10 @@
 #define CAPS_WORD_IDLE_TIMEOUT 3000
 
 // Tap-hold configuration for home row mods.
-#define TAPPING_TERM 175
+#define TAPPING_TERM 250
 #define PERMISSIVE_HOLD
 #define QUICK_TAP_TERM_PER_KEY
-
-#undef RGB_MATRIX_TIMEOUT
-#define RGB_MATRIX_TIMEOUT 60000
+#define CHORDAL_HOLD
 
 #define USB_SUSPEND_WAKEUP_DELAY 0
 #define LAYER_STATE_8BIT
