@@ -2,7 +2,6 @@
 #include "version.h"
 #include "keymap_german.h"
 #include "sendstring_german.h"
-#include "features/custom_shift_keys.h"
 
 // super alt-tab
 bool is_alt_tab_active = false;
