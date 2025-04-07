@@ -33,7 +33,6 @@ const custom_shift_key_t custom_shift_keys[] = {
   {DE_QUOT, DE_DQUO}, // ' "
   {DE_SLSH, DE_QUES}, // / ?
 };
-uint8_t NUM_CUSTOM_SHIFT_KEYS = sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
@@ -67,8 +66,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-
-  if (!process_custom_shift_keys(keycode, record)) { return false; }
 
   switch (keycode) {
 

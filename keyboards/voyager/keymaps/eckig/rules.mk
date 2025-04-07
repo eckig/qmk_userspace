@@ -8,4 +8,3 @@ SPACE_CADET_ENABLE = no
 CAPS_WORD_ENABLE = yes
 TAP_DANCE_ENABLE = no
 REPEAT_KEY_ENABLE = yes
-SRC += features/custom_shift_keys.c
