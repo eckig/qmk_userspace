@@ -135,18 +135,3 @@ void matrix_scan_user(void) {
   }
 }
 
-uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
-  // If you quickly hold a tap-hold key after tapping it, the tap action is repeated.
-  switch (keycode) {
-    case LT1_ENTER:
-    case LT1_DELETE:
-    case LT2_SPACE:
-    case LT2_BSPC:
-    case MT_SHIFT_H:
-    case MT_SHIFT_U:
-      return QUICK_TAP_TERM;  // Enable key repeating.
-    default:
-      return 0;  // Otherwise, force hold and disable key repeating.
-  }
-}
-
