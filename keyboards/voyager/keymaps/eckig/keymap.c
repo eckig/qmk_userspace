@@ -14,7 +14,6 @@ enum custom_keycodes {
   DEMO    = SAFE_RANGE + 3,
 };
 
-#define MOON_LED_LEVEL LED_LEVEL
 #define LT1_ENTER  LT(1,KC_ENTER)
 #define LT1_DELETE LT(1,KC_DELETE)
 #define LT2_SPACE  LT(2,KC_SPACE)
