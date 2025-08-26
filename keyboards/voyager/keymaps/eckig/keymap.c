@@ -23,8 +23,6 @@ enum custom_keycodes {
 #define MT_CTL_MIN MT(MOD_RCTL, DE_MINS)
 #define MT_ALT_DLR MT(MOD_LALT, MT_DLR)
 #define MT_ALT_EXC MT(MOD_RALT, MT_EXLM)
-#define MT_SHIFT_U MT(MOD_LSFT, KC_U)
-#define MT_SHIFT_H MT(MOD_RSFT, KC_H)
 
 const custom_shift_key_t custom_shift_keys[] = {
   {DE_SCLN, DE_COLN}, // ; :
@@ -36,24 +34,24 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_F5,   KC_F6,   KC_F7,   KC_F8,      KC_NO,                 KC_PSCR, DEMO,       KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
+    MT_ALT_DLR, KC_F5,   KC_F6,   KC_F7,   KC_F8,      KC_LGUI,               KC_PSCR, DEMO,       KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
     KC_TAB,     DE_SCLN, KC_COMM, KC_DOT,  KC_P,       DE_Y,                  KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
-    MT_CTL_ESC, KC_A,    KC_O,    KC_E,    MT_SHIFT_U, KC_I,                  KC_D,    MT_SHIFT_H, KC_T,    KC_N,    KC_S,    MT_CTL_MIN,
-    KC_LGUI,    DE_QUOT, KC_Q,    KC_J,    KC_K,       KC_X,                  KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    QK_REP,
+    MT_CTL_ESC, KC_A,    KC_O,    KC_E,    KC_U,       KC_I,                  KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    MT_CTL_MIN,
+    KC_LSFT,    DE_QUOT, KC_Q,    KC_J,    KC_K,       KC_X,                  KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    KC_RSFT,
                                                  LT2_BSPC, LT1_DELETE,                 LT1_ENTER, LT2_SPACE
   ),
   [1] = LAYOUT_voyager(
     KC_F1,      KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                 KC_F7,   KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   KC_NO,      KC_NO,                 KC_NO,   KC_7,       KC_8,    KC_9,    KC_NO,   KC_TRNS,
     KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   KC_NO,      CW_TOGG,               KC_NO,   KC_4,       KC_5,    KC_6,    KC_NO,   KC_TRNS,
-    KC_TRNS,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,      KC_NO,                 KC_NO,   KC_1,       KC_2,    KC_3,    KC_NO,   QK_AREP,
+    KC_TRNS,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,      KC_NO,                 KC_NO,   KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   ALT_TAB,   KC_0
   ),
   [2] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, DE_LBRC,    DE_RBRC, DE_EURO, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_CIRC, DE_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               DE_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 DE_TILD, DE_LCBR,    DE_RCBR, DE_AT,   KC_NO,   QK_AREP,
+    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 DE_TILD, DE_LCBR,    DE_RCBR, DE_AT,   KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
@@ -112,18 +110,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   }
 
   return true;
-}
-
-uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
-  if ((mods & MOD_MASK_CTRL)) {
-    switch (keycode) {
-      case KC_A: return C(KC_C);  // Ctrl+A -> Ctrl+C
-      case KC_C: return C(KC_V);  // Ctrl+C -> Ctrl+V
-      case DE_Y: return C(DE_Z);  // Ctrl+Y -> Ctrl+Z
-      case DE_Z: return C(DE_Y);  // Ctrl+Z -> Ctrl+Y
-    }
-  }
-  return KC_TRNS;
 }
 
 void matrix_scan_user(void) {
