@@ -1,6 +1,6 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
-// #include "keymap_german.h"
+#include "keymap_german.h"
 #include "keymap_german_mac_iso.h"
 #include "sendstring_german.h"
 
