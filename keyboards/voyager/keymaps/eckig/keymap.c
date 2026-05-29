@@ -3,7 +3,7 @@
 // #include "keymap_german.h"
 #include "keymap_german_mac_iso.h"
 // #include "sendstring_german.h"
-#include sendstring_german_mac_iso.h
+#include "sendstring_german_mac_iso.h"
 
 // super alt-tab
 bool is_alt_tab_active = false;
