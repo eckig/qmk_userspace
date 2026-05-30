@@ -11,10 +11,19 @@ bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
-  ALT_TAB = SAFE_RANGE,
-  MT_DLR  = SAFE_RANGE + 1,
-  MT_EXLM = SAFE_RANGE + 2,
-  DEMO    = SAFE_RANGE + 3,
+  ALT_TAB,
+  MT_DLR,
+  MT_EXLM,
+  DEMO,
+  CX_AT,
+  CX_LCBR,
+  CX_LBRC,
+  CX_RBRC,
+  CX_RCBR,
+  CX_BSLS,
+  CX_EURO,
+  CX_TILD,
+  CX_PIPE
 };
 
 #define LT1_ENTER  LT(1,KC_ENTER)
