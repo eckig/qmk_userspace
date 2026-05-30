@@ -1,7 +1,8 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
 // #include "keymap_german.h"
-#include "keymap_german_mac_iso.h"
+// #include "keymap_german_mac_iso.h"
+#include "keymap_german_mac_win.h"
 // #include "sendstring_german.h"
 #include "sendstring_german_mac_iso.h"
 
@@ -51,9 +52,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [2] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, DE_LBRC,    DE_RBRC, DE_EURO, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_CIRC, DE_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               DE_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 DE_TILD, DE_LCBR,    DE_RCBR, DE_AT,   KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_CIRC, CX_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
@@ -66,6 +67,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+
+  os_variant_t host = detected_host_os();
+  bool isMac = host == OS_MACOS || host == OS_IOS;
 
   switch (keycode) {
 
@@ -109,6 +113,43 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
     break;
 
+    // handle keycodes that differ between Mac and PC
+    case CX_AT:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_AT : PC_AT); }
+        else                      { unregister_code16(isMac ? MAC_AT : PC_AT); }
+        return false;
+    case CX_LCBR:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_LCBR : PC_LCBR); }
+        else                      { unregister_code16(isMac ? MAC_LCBR : PC_LCBR); }
+        return false;
+    case CX_LBRC:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_LBRC : PC_LBRC); }
+        else                      { unregister_code16(isMac ? MAC_LBRC : PC_LBRC); }
+        return false;
+    case CX_RBRC:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_RBRC : PC_RBRC); }
+        else                      { unregister_code16(isMac ? MAC_RBRC : PC_RBRC); }
+        return false;
+    case CX_RCBR:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_RCBR : PC_RCBR); }
+        else                      { unregister_code16(isMac ? MAC_RCBR : PC_RCBR); }
+        return false;
+    case CX_BSLS:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_BSLS : PC_BSLS); }
+        else                      { unregister_code16(isMac ? MAC_BSLS : PC_BSLS); }
+        return false;
+    case CX_EURO:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_EURO : PC_EURO); }
+        else                      { unregister_code16(isMac ? MAC_EURO : PC_EURO); }
+        return false;
+    case CX_TILD:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_TILD : PC_TILD); }
+        else                      { unregister_code16(isMac ? MAC_TILD : PC_TILD); }
+        return false;
+    case CX_PIPE:
+        if(record->event.pressed) { register_code16  (isMac ? MAC_PIPE : PC_PIPE); }
+        else                      { unregister_code16(isMac ? MAC_PIPE : PC_PIPE); }
+        return false;
   }
 
   return true;
