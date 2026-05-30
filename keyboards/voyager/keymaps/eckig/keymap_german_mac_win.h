@@ -1,7 +1,8 @@
 #pragma once
 #include "keycodes.h"
 
-// Aliases
+// keymap_german.h
+// keys that are the same on Mac and Pc
 #define DE_CIRC KC_GRV  // ^ (dead)
 #define DE_1    KC_1    // 1
 #define DE_2    KC_2    // 2
@@ -70,6 +71,7 @@
 #define DE_COLN S(DE_DOT)  // :
 #define DE_UNDS S(DE_MINS) // _
 
+// "normal" keycodes for DE symbols
 #define PC_LCBR ALGR(DE_7)    // {
 #define PC_LBRC ALGR(DE_8)    // [
 #define PC_RBRC ALGR(DE_9)    // ]
@@ -81,6 +83,7 @@
 #define PC_PIPE ALGR(DE_LABK) // |
 #define PC_MICR ALGR(DE_M)    // µ
 
+// Mac keycodes for DE symbols (keymap_german_mac_iso.h)
 #define MAC_LCBR A(DE_8)      // {
 #define MAC_LBRC A(DE_5)      // [
 #define MAC_RBRC A(DE_6)      // ]
