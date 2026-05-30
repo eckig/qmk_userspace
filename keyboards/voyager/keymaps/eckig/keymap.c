@@ -2,9 +2,9 @@
 #include "version.h"
 // #include "keymap_german.h"
 // #include "keymap_german_mac_iso.h"
+// #include "sendstring_german_mac_iso.h"
 #include "keymap_german_mac_win.h"
-// #include "sendstring_german.h"
-#include "sendstring_german_mac_iso.h"
+#include "sendstring_german.h"
 
 // super alt-tab
 bool is_alt_tab_active = false;
@@ -173,8 +173,7 @@ void matrix_scan_user(void) {
   }
 }
 
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record,
-                      uint16_t other_keycode, keyrecord_t* other_record) {
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
     // allow ctrl+shift directly:
     switch (tap_hold_keycode) {
         case MT_CTL_ESC:
