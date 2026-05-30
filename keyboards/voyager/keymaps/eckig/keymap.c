@@ -11,7 +11,7 @@ bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
 
 enum custom_keycodes {
-  ALT_TAB,
+  ALT_TAB = SAFE_RANGE,
   MT_DLR,
   MT_EXLM,
   DEMO,
