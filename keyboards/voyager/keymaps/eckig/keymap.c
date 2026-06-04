@@ -120,6 +120,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         SEND_STRING("admin\tAdmin#123\n");
       }
+      return false;
+    break;
+
+    case KC_T:
+    case KC_W:
+      if (isMac && get_mods() == MOD_BIT(MOD_MASK_CTRL)) {
+          if (record->event.pressed) {
+            del_mods(MOD_MASK_CTRL);
+            add_mods(MOD_MASK_GUI);
+          }
+      }
     break;
 
     // handle keycodes that differ between Mac and PC
