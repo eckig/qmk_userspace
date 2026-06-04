@@ -125,14 +125,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_T:
     case KC_W:
-      if (isMac && get_mods() == MOD_BIT(MOD_MASK_CTRL)) {
-          if (record->event.pressed) {
-            register_code16(LGUI(keycode));
-          }
-          else {
-            unregister_code16(LGUI(keycode));
-          }
-          return false;
+      if (isMac && get_mods() & MOD_MASK_CTRL && record->event.pressed && record->tap.count > 0) {
+        tap_code16(LGUI(keycode));
+        return false;
       }
     break;
 
