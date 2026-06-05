@@ -125,14 +125,19 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 
     case KC_T:
     case KC_W:
+    case KC_K:
+    case KC_A:
+    case KC_C:
+    case KC_V:
+    case KC_Q:
       if (isMac) {
         uint8_t mod = get_mods();
-        // swap LCTL to LGUI
-        if (((mod & MOD_BIT(KC_LCTL)) && !(mod & MOD_BIT(KC_LGUI))) || (!(mod & MOD_BIT(KC_LCTL)) && (mod & MOD_BIT(KC_LGUI)))) {
+        // swap LCTL with LGUI
+        if (mod == MOD_BIT(KC_LCTL) || mod == MOD_BIT(KC_LGUI)) {
             mod ^= (MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI));
         }
-        // swap RCTL to RGUI
-        if (((mod & MOD_BIT(KC_RCTL)) && !(mod & MOD_BIT(KC_RGUI))) || (!(mod & MOD_BIT(KC_RCTL)) && (mod & MOD_BIT(KC_RGUI)))) {
+        // swap RCTL with RGUI
+        else if (mod == MOD_BIT(KC_RCTL) || mod == MOD_BIT(KC_RGUI)) {
             mod ^= (MOD_BIT(KC_RCTL) | MOD_BIT(KC_RGUI));
         }
         set_mods(mod);
