@@ -127,7 +127,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     case KC_T:
     case KC_W:
     case KC_K:
-    case KC_A:
     case KC_C:
     case KC_V:
     case KC_Q:
