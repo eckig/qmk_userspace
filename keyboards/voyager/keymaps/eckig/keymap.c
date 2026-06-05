@@ -124,15 +124,18 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     break;
 
     case KC_T:
-      if (isMac && get_mods() == MOD_MASK_CTRL && record->event.pressed && record->tap.count > 0) {
-        tap_code16(LGUI(KC_T));
-        return false;
-      }
-    break;
     case KC_W:
-      if (isMac && get_mods() == MOD_MASK_CTRL && record->event.pressed && record->tap.count > 0) {
-        tap_code16(LGUI(KC_W));
-        return false;
+      if (isMac) {
+        uint8_t mod = get_mods();
+        // swap LCTL to LGUI
+        if (((mod & MOD_BIT(KC_LCTL)) && !(mod & MOD_BIT(KC_LGUI))) || (!(mod & MOD_BIT(KC_LCTL)) && (mod & MOD_BIT(KC_LGUI)))) {
+            mod ^= (MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI));
+        }
+        // swap RCTL to RGUI
+        if (((mod & MOD_BIT(KC_RCTL)) && !(mod & MOD_BIT(KC_RGUI))) || (!(mod & MOD_BIT(KC_RCTL)) && (mod & MOD_BIT(KC_RGUI)))) {
+            mod ^= (MOD_BIT(KC_RCTL) | MOD_BIT(KC_RGUI));
+        }
+        set_mods(mod);
       }
     break;
 
