@@ -2,6 +2,7 @@
   "modules": [
     "getreuer/custom_shift_keys",
     "zsa/oryx",
+    "zsa/navigator_trackball",
     "zsa/defaults"
   ]
 }

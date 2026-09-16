@@ -46,10 +46,10 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_F5,   KC_F6,   KC_F7,   KC_F8,      KC_LGUI,               KC_PSCR, DEMO,       KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
-    KC_TAB,     DE_SCLN, KC_COMM, KC_DOT,  KC_P,       DE_Y,                  KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
-    KC_LSFT,    KC_A,    KC_O,    KC_E,    KC_U,       KC_I,                  KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
-    MT_CTL_ESC, DE_QUOT, KC_Q,    KC_J,    KC_K,       KC_X,                  KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
+    MT_ALT_DLR, KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN3, DRAG_SCROLL, KC_LGUI,     KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
+    KC_TAB,     DE_SCLN,    KC_COMM,    KC_DOT,     KC_P,        DE_Y,        KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
+    KC_LSFT,    KC_A,       KC_O,       KC_E,       KC_U,        KC_I,        KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
+    MT_CTL_ESC, DE_QUOT,    KC_Q,       KC_J,       KC_K,        KC_X,        KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
                                                  LT2_BSPC, LT1_DELETE,                 LT1_ENTER, LT2_SPACE
   ),
   [1] = LAYOUT_voyager(
@@ -67,7 +67,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_ADIA, DE_ODIA, DE_UDIA, DE_SS,      KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -121,25 +121,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         SEND_STRING("admin\tAdmin#123\n");
       }
       return false;
-    break;
-
-    case KC_F:
-    case KC_T:
-    case KC_W:
-    case KC_K:
-    case KC_Q:
-      if (isMac) {
-        uint8_t mod = get_mods();
-        // swap LCTL with LGUI
-        if (mod == MOD_BIT(KC_LCTL) || mod == MOD_BIT(KC_LGUI)) {
-            mod ^= (MOD_BIT(KC_LCTL) | MOD_BIT(KC_LGUI));
-        }
-        // swap RCTL with RGUI
-        else if (mod == MOD_BIT(KC_RCTL) || mod == MOD_BIT(KC_RGUI)) {
-            mod ^= (MOD_BIT(KC_RCTL) | MOD_BIT(KC_RGUI));
-        }
-        set_mods(mod);
-      }
     break;
 
     // handle keycodes that differ between Mac and PC
