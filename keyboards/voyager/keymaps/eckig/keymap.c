@@ -60,14 +60,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                  KC_LEFT,  KC_RIGHT,                   ALT_TAB,   KC_0
   ),
   [2] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_CIRC, CX_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_ADIA, DE_ODIA, DE_UDIA, DE_SS,      KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
