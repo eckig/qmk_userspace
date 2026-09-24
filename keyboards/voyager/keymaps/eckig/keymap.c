@@ -174,6 +174,36 @@ void matrix_scan_user(void) {
   }
 }
 
+#ifdef RGB_MATRIX_ENABLE
+// Per-key lighting for the active layer:
+// mouse keys = green, other assigned keys = blue, KC_TRNS / KC_NO = off.
+// Colors are scaled by the current RGB matrix brightness.
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+  uint8_t layer = get_highest_layer(layer_state | default_layer_state);
+  uint8_t val   = rgb_matrix_get_val();
+
+  for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
+    for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+      uint8_t index = g_led_config.matrix_co[row][col];
+      if (index < led_min || index >= led_max || index == NO_LED) {
+        continue;
+      }
+
+      uint16_t keycode = keymap_key_to_keycode(layer, (keypos_t){.col = col, .row = row});
+
+      if (keycode == KC_TRNS || keycode == KC_NO) {
+        rgb_matrix_set_color(index, 0, 0, 0);
+      } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
+        rgb_matrix_set_color(index, 0, val, 0);
+      } else {
+        rgb_matrix_set_color(index, 0, 0, val);
+      }
+    }
+  }
+  return false;
+}
+#endif
+
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
     // allow ctrl+shift directly:
     switch (tap_hold_keycode) {
