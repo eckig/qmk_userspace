@@ -31,6 +31,7 @@ enum custom_keycodes {
 #define LT2_SPACE  LT(2,KC_SPACE)
 #define LT2_BSPC   LT(2,KC_BSPC)
 #define LT3_C      LT(3,KC_C)
+#define LT4_Y      LT(SCROLL_LAYER,DE_Y) // hold: trackball scrolls (NAVIGATOR_DRAG_SCROLL_LAYERS)
 #define MT_CTL_ESC MT(MOD_LCTL, KC_ESCAPE)
 #define MT_CTL_MIN MT(MOD_RCTL, DE_MINS)
 #define MT_ALT_DLR MT(MOD_LALT, MT_DLR)
@@ -46,11 +47,11 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_MS_BTN1, KC_MS_BTN2, KC_MS_BTN3, DRAG_SCROLL, KC_LGUI,     KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
-    KC_TAB,     DE_SCLN,    KC_COMM,    KC_DOT,     KC_P,        DE_Y,        KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
-    KC_LSFT,    KC_A,       KC_O,       KC_E,       KC_U,        KC_I,        KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
-    MT_CTL_ESC, DE_QUOT,    KC_Q,       KC_J,       KC_K,        KC_X,        KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
-                                                 LT2_BSPC, LT1_DELETE,                 LT1_ENTER, LT2_SPACE
+    MT_ALT_DLR, KC_MS_BTN3, KC_TRNS, KC_MS_BTN1, KC_MS_BTN2, KC_LGUI,         KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
+    KC_TAB,     DE_SCLN,    KC_COMM, KC_DOT,     KC_P,       LT4_Y,           KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
+    KC_LSFT,    KC_A,       KC_O,    KC_E,       KC_U,       KC_I,            KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
+    MT_CTL_ESC, DE_QUOT,    KC_Q,    KC_J,       KC_K,       KC_X,            KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
+                                                 LT2_BSPC, LT1_DELETE,                    LT1_ENTER, LT2_SPACE
   ),
   [1] = LAYOUT_voyager(
     KC_F1,      KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                 KC_F7,   KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
@@ -70,6 +71,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_ADIA, DE_ODIA, DE_UDIA, DE_SS,      KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                                 KC_TRNS,  KC_TRNS,                   KC_TRNS,    KC_TRNS
+  ),
+  // Drag-scroll layer: empty, only activates trackball scrolling while held.
+  [SCROLL_LAYER] = LAYOUT_voyager(
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                                  KC_TRNS,  KC_TRNS,                   KC_TRNS,    KC_TRNS
   ),
@@ -176,7 +185,8 @@ void matrix_scan_user(void) {
 
 #ifdef RGB_MATRIX_ENABLE
 // Per-key lighting for the active layer:
-// mouse keys = green, other assigned keys = blue, KC_TRNS / KC_NO = off.
+// mouse keys = green, F-keys = light blue,
+// other assigned keys = blue, KC_TRNS / KC_NO = off.
 // Colors are scaled by the current RGB matrix brightness.
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
   uint8_t layer = get_highest_layer(layer_state | default_layer_state);
@@ -193,8 +203,13 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
       if (keycode == KC_TRNS || keycode == KC_NO) {
         rgb_matrix_set_color(index, 0, 0, 0);
+      } else if (keycode == LT4_Y) {
+        // tap = key (blue) + hold = scroll (green) -> cyan
+        rgb_matrix_set_color(index, 0, val, val);
       } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
         rgb_matrix_set_color(index, 0, val, 0);
+      } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)) {
+        rgb_matrix_set_color(index, val / 3, val / 3, val);
       } else {
         rgb_matrix_set_color(index, 0, 0, val);
       }
