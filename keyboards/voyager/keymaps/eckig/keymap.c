@@ -210,11 +210,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
       } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
-        rgb_matrix_set_color(index, 0, val, 0);
+        rgb_matrix_set_color(index, 0, val / 2, 0);
       } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)) {
         rgb_matrix_set_color(index, val * 4 / 5, val * 4 / 5, val);
       } else {
-        rgb_matrix_set_color(index, 0, 0, val);
+        rgb_matrix_set_color(index, 0, 0, val / 2);
       }
     }
   }
