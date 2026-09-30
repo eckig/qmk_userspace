@@ -5,7 +5,7 @@
 #define CAPS_WORD_IDLE_TIMEOUT 3000
 
 // Tap-hold configuration for home row mods.
-#define TAPPING_TERM 250
+#define TAPPING_TERM 200
 #define PERMISSIVE_HOLD
 #define CHORDAL_HOLD
 

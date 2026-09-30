@@ -1,5 +1,4 @@
 #include QMK_KEYBOARD_H
-#include "version.h"
 // #include "keymap_german.h"
 // #include "keymap_german_mac_iso.h"
 // #include "sendstring_german_mac_iso.h"
@@ -9,6 +8,7 @@
 // super alt-tab
 bool is_alt_tab_active = false;
 uint16_t alt_tab_timer = 0;
+uint16_t alt_tab_mod = KC_LALT; // Cmd on macOS, Alt elsewhere
 
 enum custom_keycodes {
   ALT_TAB = SAFE_RANGE,
@@ -47,7 +47,7 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_TRNS, KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,         KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
+    MT_ALT_DLR, KC_NO,   KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,         KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
     KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     LT4_P,      DE_Y,            KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
     KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,            KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
     MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,            KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
@@ -95,7 +95,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       if (record->event.pressed) {
         if (!is_alt_tab_active) {
           is_alt_tab_active = true;
-          register_code(KC_LALT);
+          alt_tab_mod = isMac ? KC_LGUI : KC_LALT;
+          register_code(alt_tab_mod);
         }
         alt_tab_timer = timer_read();
         register_code(KC_TAB);
@@ -177,7 +178,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 void matrix_scan_user(void) {
   if (is_alt_tab_active) {
     if (timer_elapsed(alt_tab_timer) > 600) {
-      unregister_code(KC_LALT);
+      unregister_code(alt_tab_mod);
       is_alt_tab_active = false;
     }
   }
@@ -225,6 +226,13 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
     // allow ctrl+shift directly:
     switch (tap_hold_keycode) {
+        // keep scroll layer active when clicking mouse buttons while holding P:
+        case LT4_P:
+            if (IS_MOUSE_KEYCODE(other_keycode)) {
+                return true;
+            }
+            break;
+
         case MT_CTL_ESC:
             if (other_keycode == KC_LSFT) {
                 return true;
