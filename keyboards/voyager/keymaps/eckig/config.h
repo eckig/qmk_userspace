@@ -14,8 +14,6 @@
 
 #define NAVIGATOR_SCROLL_DIVIDER 50
 
-#define NAVIGATOR_DRAG_SCROLL_LAYERS { 1 }
-
 #define RGB_MATRIX_TIMEOUT 300000 // 5 min idle, in ms
 #define RGB_MATRIX_SLEEP
 
