@@ -64,7 +64,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,    DE_DEG,  KC_NO,      KC_NO,      KC_NO,      DE_GRV,       DE_AMPR,    CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,      CX_PIPE,    DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,        CX_TILD,    CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
-                                                 KC_LEFT,    DRAG_SCROLL,  KC_MS_BTN1, KC_MS_BTN1
+                                                 KC_LEFT,    DRAG_SCROLL,  KC_MS_BTN1, KC_MS_BTN2
   ),
   [3] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
