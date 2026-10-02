@@ -31,7 +31,6 @@ enum custom_keycodes {
 #define LT2_SPACE  LT(2,KC_SPACE)
 #define LT2_BSPC   LT(2,KC_BSPC)
 #define LT3_C      LT(3,KC_C)
-#define LT4_P      LT(SCROLL_LAYER,KC_P) // hold: trackball scrolls (NAVIGATOR_DRAG_SCROLL_LAYERS)
 #define MT_CTL_ESC MT(MOD_LCTL, KC_ESCAPE)
 #define MT_CTL_MIN MT(MOD_RCTL, DE_MINS)
 #define MT_ALT_DLR MT(MOD_LALT, MT_DLR)
@@ -48,7 +47,7 @@ const custom_shift_key_t custom_shift_keys[] = {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     MT_ALT_DLR, KC_NO,   KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,         KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
-    KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     LT4_P,      DE_Y,            KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
+    KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,            KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
     KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,            KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
     MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,            KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
                                                  LT2_BSPC, LT1_DELETE,                    LT1_ENTER, LT2_SPACE
@@ -61,24 +60,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                  KC_LEFT,  KC_RIGHT,                   ALT_TAB,   KC_0
   ),
   [2] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_CIRC, CX_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,         KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    DE_DEG,  KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, DE_GRV,          DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,         CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,           CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_ADIA, DE_ODIA, DE_UDIA, DE_SS,      KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                                 KC_TRNS,  KC_TRNS,                   KC_TRNS,    KC_TRNS
-  ),
-  // Drag-scroll layer: empty, only activates trackball scrolling while held.
-  [SCROLL_LAYER] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                                  KC_TRNS,  KC_TRNS,                   KC_TRNS,    KC_TRNS
   ),
@@ -204,9 +195,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
       if (keycode == KC_TRNS || keycode == KC_NO) {
         rgb_matrix_set_color(index, 0, 0, 0);
-      } else if (keycode == LT4_P) {
-        // tap = key (blue) + hold = scroll (green) -> cyan
-        rgb_matrix_set_color(index, 0, val, val);
       } else if (keycode == KC_MS_BTN3) {
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
@@ -226,13 +214,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
     // allow ctrl+shift directly:
     switch (tap_hold_keycode) {
-        // keep scroll layer active when clicking mouse buttons while holding P:
-        case LT4_P:
-            if (IS_MOUSE_KEYCODE(other_keycode)) {
-                return true;
-            }
-            break;
-
         case MT_CTL_ESC:
             if (other_keycode == KC_LSFT) {
                 return true;

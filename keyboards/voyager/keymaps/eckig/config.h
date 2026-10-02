@@ -14,9 +14,8 @@
 
 #define NAVIGATOR_SCROLL_DIVIDER 50
 
-// Layer 4 is an empty layer (held via LT on P); while active the trackball scrolls.
-#define SCROLL_LAYER 4
-#define NAVIGATOR_DRAG_SCROLL_LAYERS { SCROLL_LAYER }
+// While the symbol layer (2, held via Backspace/Space thumb keys) is active, the trackball scrolls.
+#define NAVIGATOR_DRAG_SCROLL_LAYERS { 2 }
 
 #define RGB_MATRIX_TIMEOUT 300000 // 5 min idle, in ms
 #define RGB_MATRIX_SLEEP
