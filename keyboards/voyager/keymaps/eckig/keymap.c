@@ -46,32 +46,32 @@ const custom_shift_key_t custom_shift_keys[] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_NO,   KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,         KC_RGUI, KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
-    KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,            KC_F,    KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
-    KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,            KC_D,    KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
-    MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,            KC_B,    KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
-                                                 LT2_BSPC, LT1_DELETE,                    LT1_ENTER, LT2_SPACE
+    MT_ALT_DLR, KC_NO,   KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,      KC_RGUI,    KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
+    KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,         KC_F,       KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
+    KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,         KC_D,       KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
+    MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,         KC_B,       KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
+                                                 LT2_BSPC,   LT1_DELETE,   LT1_ENTER,  LT2_SPACE
   ),
   [1] = LAYOUT_voyager(
-    KC_F1,      KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                 KC_F7,   KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   RGB_VAD,    RGB_VAI,               KC_NO,   KC_7,       KC_8,    KC_9,    KC_NO,   KC_TRNS,
-    KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   KC_NO,      CW_TOGG,               KC_NO,   KC_4,       KC_5,    KC_6,    KC_NO,   KC_TRNS,
-    KC_TRNS,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,      KC_MS_BTN3,            KC_NO,   KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
-                                               KC_MS_BTN1, KC_MS_BTN2,                    ALT_TAB,   KC_0
+    KC_F1,      KC_F2,   KC_F3,      KC_F4,      KC_F5,      KC_F6,        KC_F7,      KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    KC_TRNS,    KC_NO,   KC_NO,      KC_NO,      RGB_VAD,    RGB_VAI,      KC_NO,      KC_7,       KC_8,    KC_9,    KC_NO,   KC_TRNS,
+    KC_TRNS,    KC_NO,   KC_NO,      KC_END,     KC_HOME,    CW_TOGG,      KC_NO,      KC_4,       KC_5,    KC_6,    KC_NO,   KC_TRNS,
+    KC_TRNS,    KC_NO,   KC_NO,      KC_DOWN,    KC_UP,      KC_NO,        KC_NO,      KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
+                                                 KC_LEFT,    KC_RIGHT,     ALT_TAB,    KC_0
   ),
   [2] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_CIRC, CX_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
-                                                 KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_PSCR,    DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    DE_DEG,  KC_NO,      KC_NO,      KC_NO,      DE_GRV,       DE_AMPR,    CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,      CX_PIPE,    DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,        CX_TILD,    CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
+                                                 KC_LEFT,    KC_RIGHT,     KC_MS_BTN1, KC_MS_BTN1
   ),
   [3] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    DE_ADIA, DE_ODIA, DE_UDIA, DE_SS,      KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                                 KC_TRNS,  KC_TRNS,                   KC_TRNS,    KC_TRNS
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    DE_ADIA, DE_ODIA,    DE_UDIA,    DE_SS,      KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                                 KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS
   ),
 };
 
@@ -177,7 +177,9 @@ void matrix_scan_user(void) {
 
 #ifdef RGB_MATRIX_ENABLE
 // Per-key lighting for the active layer:
-// mouse keys = green, F-keys + arrow keys = white,
+// mouse keys = green, F-keys + arrows + Home/End = white,
+// numbers = purple, settings (brightness, Caps Word toggle) = yellow,
+// Shift = orange while Caps Word is on,
 // other assigned keys = blue, KC_TRNS / KC_NO = off.
 // Colors are scaled by the current RGB matrix brightness.
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -195,13 +197,23 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
       if (keycode == KC_TRNS || keycode == KC_NO) {
         rgb_matrix_set_color(index, 0, 0, 0);
+      } else if ((keycode == KC_LSFT || keycode == KC_RSFT) && is_caps_word_on()) {
+        // Caps Word active: orange Shift keys
+        rgb_matrix_set_color(index, val, val / 3, 0);
+      } else if (keycode >= KC_1 && keycode <= KC_0) {
+        // number pad: purple
+        rgb_matrix_set_color(index, val / 2, 0, val);
+      } else if (keycode == RGB_VAD || keycode == RGB_VAI || keycode == CW_TOGG) {
+        // settings keys: yellow
+        rgb_matrix_set_color(index, val, val * 2 / 3, 0);
       } else if (keycode == KC_MS_BTN3) {
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
       } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
         rgb_matrix_set_color(index, 0, val, 0);
       } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)
-                 || (keycode >= KC_RIGHT && keycode <= KC_UP)) {
+                 || (keycode >= KC_RIGHT && keycode <= KC_UP)
+                 || keycode == KC_HOME || keycode == KC_END) {
         rgb_matrix_set_color(index, val, val, val);
       } else {
         rgb_matrix_set_color(index, 0, 0, val);

@@ -14,8 +14,7 @@
 
 #define NAVIGATOR_SCROLL_DIVIDER 50
 
-// While the symbol layer (2, held via Backspace/Space thumb keys) is active, the trackball scrolls.
-#define NAVIGATOR_DRAG_SCROLL_LAYERS { 2 }
+#define NAVIGATOR_DRAG_SCROLL_LAYERS { 1 }
 
 #define RGB_MATRIX_TIMEOUT 300000 // 5 min idle, in ms
 #define RGB_MATRIX_SLEEP
