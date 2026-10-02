@@ -56,14 +56,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_F1,      KC_F2,   KC_F3,   KC_F4,   KC_F5,      KC_F6,                 KC_F7,   KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   RGB_VAD,    RGB_VAI,               KC_NO,   KC_7,       KC_8,    KC_9,    KC_NO,   KC_TRNS,
     KC_TRNS,    KC_NO,   KC_NO,   KC_NO,   KC_NO,      CW_TOGG,               KC_NO,   KC_4,       KC_5,    KC_6,    KC_NO,   KC_TRNS,
-    KC_TRNS,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,      KC_NO,                 KC_NO,   KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
-                                                 KC_LEFT,  KC_RIGHT,                   ALT_TAB,   KC_0
+    KC_TRNS,    KC_NO,   KC_NO,   KC_DOWN, KC_UP,      KC_MS_BTN3,            KC_NO,   KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
+                                               KC_MS_BTN1, KC_MS_BTN2,                    ALT_TAB,   KC_0
   ),
   [2] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,         KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-    KC_TRNS,    DE_DEG,  KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, DE_GRV,          DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,         CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
-    KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,           CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS,               KC_PSCR, DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    DE_DEG,  KC_NO,   KC_NO,   KC_NO,      DE_GRV,                DE_AMPR, CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_CIRC, CX_BSLS, DE_PLUS, DE_EQL,     DE_HASH,               CX_PIPE, DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
+    KC_TRNS,    DE_SECT, KC_NO,   DE_ASTR, KC_NO,      KC_NO,                 CX_TILD, CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
                                                  KC_LEFT,  KC_RIGHT,                   KC_HOME,   KC_END
   ),
   [3] = LAYOUT_voyager(
@@ -177,7 +177,7 @@ void matrix_scan_user(void) {
 
 #ifdef RGB_MATRIX_ENABLE
 // Per-key lighting for the active layer:
-// mouse keys = green, F-keys = white,
+// mouse keys = green, F-keys + arrow keys = white,
 // other assigned keys = blue, KC_TRNS / KC_NO = off.
 // Colors are scaled by the current RGB matrix brightness.
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
@@ -200,7 +200,8 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         rgb_matrix_set_color(index, val / 3, val, val / 3);
       } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
         rgb_matrix_set_color(index, 0, val, 0);
-      } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)) {
+      } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)
+                 || (keycode >= KC_RIGHT && keycode <= KC_UP)) {
         rgb_matrix_set_color(index, val, val, val);
       } else {
         rgb_matrix_set_color(index, 0, 0, val);
