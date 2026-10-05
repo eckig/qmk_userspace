@@ -36,7 +36,8 @@ enum custom_keycodes {
 #define MT_ALT_DLR MT(MOD_LALT, MT_DLR)
 #define MT_ALT_EXC MT(MOD_RALT, MT_EXLM)
 
-const custom_shift_key_t custom_shift_keys[] = {
+const custom_shift_key_t custom_shift_keys[] =
+{
   {DE_SCLN, DE_COLN}, // ; :
   {KC_COMM, DE_LABK}, // , <
   {KC_DOT , DE_RABK}, // . >
@@ -44,14 +45,17 @@ const custom_shift_key_t custom_shift_keys[] = {
   {DE_SLSH, DE_QUES}, // / ?
 };
 
-const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
+const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
+{
+  //base
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_NO,   KC_MS_BTN1, KC_MS_BTN3, KC_MS_BTN2, KC_LGUI,      KC_RGUI,    KC_F5,      KC_F6,   KC_F7,   KC_F8,   MT_ALT_EXC,
+    MT_ALT_DLR, KC_F5,   KC_F6,      KC_F7,      KC_F8,      KC_LGUI,      KC_RGUI,    KC_NO,      KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
     KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,         KC_F,       KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
     KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,         KC_D,       KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
     MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,         KC_B,       KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
                                                  LT2_BSPC,   LT1_DELETE,   LT1_ENTER,  LT2_SPACE
   ),
+  // numbers
   [1] = LAYOUT_voyager(
     KC_F1,      KC_F2,   KC_F3,      KC_F4,      KC_F5,      KC_F6,        KC_F7,      KC_F8,      KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_TRNS,    KC_NO,   KC_NO,      KC_NO,      RGB_VAD,    RGB_VAI,      KC_NO,      KC_7,       KC_8,    KC_9,    KC_NO,   KC_TRNS,
@@ -59,13 +63,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,    KC_NO,   KC_NO,      KC_DOWN,    KC_UP,      KC_NO,        KC_NO,      KC_1,       KC_2,    KC_3,    KC_NO,   KC_TRNS,
                                                  KC_LEFT,    KC_RIGHT,     ALT_TAB,    KC_0
   ),
+  // symbols
   [2] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_PSCR,    DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_DEG,  KC_NO,      KC_NO,      KC_NO,      DE_GRV,       DE_AMPR,    CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,      CX_PIPE,    DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,        CX_TILD,    CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
-                                                 KC_LEFT,    DRAG_SCROLL,  KC_MS_BTN1, KC_MS_BTN2
+                                                 KC_LEFT,    KC_RIGHT,     KC_TRNS,    KC_TRNS
   ),
+  // umlaute
   [3] = LAYOUT_voyager(
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -73,52 +79,70 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
                                                  KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS
   ),
+  // auto mouse layer
+  [4] = LAYOUT_voyager(
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_MS_BTN3, KC_MS_BTN2, KC_MS_BTN1, KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                                 DRAG_SCROLL,KC_TRNS,      KC_TRNS,    KC_TRNS
+  ),
 };
 
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record)
+{
 
   os_variant_t host = detected_host_os();
   bool isMac = host == OS_MACOS || host == OS_IOS;
 
-  switch (keycode) {
+  switch (keycode)
+  {
 
     case ALT_TAB:
-      if (record->event.pressed) {
-        if (!is_alt_tab_active) {
+      if (record->event.pressed)
+      {
+        if (!is_alt_tab_active)
+        {
           is_alt_tab_active = true;
           alt_tab_mod = isMac ? KC_LGUI : KC_LALT;
           register_code(alt_tab_mod);
         }
         alt_tab_timer = timer_read();
         register_code(KC_TAB);
-      } else {
+      }
+      else
+      {
         unregister_code(KC_TAB);
       }
       break;
 
     case MT_ALT_DLR:
-      if (record->event.pressed && record->tap.count > 0) {
+      if (record->event.pressed && record->tap.count > 0)
+      {
           tap_code16(DE_DLR);
           return false;
       }
     break;
 
     case MT_ALT_EXC:
-      if (record->event.pressed && record->tap.count > 0) {
+      if (record->event.pressed && record->tap.count > 0)
+      {
           tap_code16(DE_EXLM);
           return false;
       }
     break;
 
     case MT_CTL_MIN:
-      if(record->event.pressed && is_caps_word_on()) {
+      if(record->event.pressed && is_caps_word_on())
+      {
         tap_code16(DE_UNDS);
         return false;
       }
     break;
 
     case DEMO:
-      if (record->event.pressed) {
+      if (record->event.pressed)
+      {
         SEND_STRING("admin\tAdmin#123\n");
       }
       return false;
@@ -166,56 +190,95 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   return true;
 }
 
-void matrix_scan_user(void) {
-  if (is_alt_tab_active) {
-    if (timer_elapsed(alt_tab_timer) > 600) {
+void matrix_scan_user(void)
+{
+  if (is_alt_tab_active)
+  {
+    if (timer_elapsed(alt_tab_timer) > 600)
+    {
       unregister_code(alt_tab_mod);
       is_alt_tab_active = false;
     }
   }
 }
 
+#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+void keyboard_post_init_user(void)
+{
+  set_auto_mouse_enable(true);
+}
+
+// Keys that keep the auto mouse layer active instead of leaving it
+bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record)
+{
+  if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL)
+  {
+    return true;
+  }
+  switch (keycode)
+  {
+    case KC_LSFT: case KC_RSFT:
+    case KC_LCTL: case KC_RCTL:
+    case KC_LALT: case KC_RALT:
+    case KC_LGUI: case KC_RGUI:
+      return true;
+  }
+  return false;
+}
+#endif
+
 #ifdef RGB_MATRIX_ENABLE
-// Per-key lighting for the active layer:
-// mouse keys = green, F-keys + arrows + Home/End = white,
-// numbers = purple, settings (brightness, Caps Word toggle) = yellow,
-// Shift = orange while Caps Word is on,
-// other assigned keys = blue, KC_TRNS / KC_NO = off.
-// Colors are scaled by the current RGB matrix brightness.
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
+{
   uint8_t layer = get_highest_layer(layer_state | default_layer_state);
   uint8_t val   = rgb_matrix_get_val();
 
-  for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-    for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
+  for (uint8_t row = 0; row < MATRIX_ROWS; ++row)
+  {
+    for (uint8_t col = 0; col < MATRIX_COLS; ++col)
+    {
       uint8_t index = g_led_config.matrix_co[row][col];
-      if (index < led_min || index >= led_max || index == NO_LED) {
+      if (index < led_min || index >= led_max || index == NO_LED)
+      {
         continue;
       }
 
       uint16_t keycode = keymap_key_to_keycode(layer, (keypos_t){.col = col, .row = row});
 
-      if (keycode == KC_TRNS || keycode == KC_NO) {
+      if (keycode == KC_TRNS || keycode == KC_NO)
+      {
         rgb_matrix_set_color(index, 0, 0, 0);
-      } else if ((keycode == KC_LSFT || keycode == KC_RSFT) && is_caps_word_on()) {
+      }
+      else if ((keycode == KC_LSFT || keycode == KC_RSFT) && is_caps_word_on())
+      {
         // Caps Word active: orange Shift keys
         rgb_matrix_set_color(index, val, val / 3, 0);
-      } else if (keycode >= KC_1 && keycode <= KC_0) {
+      }
+      else if (keycode >= KC_1 && keycode <= KC_0)
+      {
         // number pad: purple
         rgb_matrix_set_color(index, val / 2, 0, val);
-      } else if (keycode == RGB_VAD || keycode == RGB_VAI || keycode == CW_TOGG) {
+      }
+      else if (keycode == RGB_VAD || keycode == RGB_VAI || keycode == CW_TOGG)
+      {
         // settings keys: yellow
         rgb_matrix_set_color(index, val, val * 2 / 3, 0);
-      } else if (keycode == KC_MS_BTN3) {
+      }
+      else if (keycode == KC_MS_BTN3)
+      {
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
-      } else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL) {
+      }
+      else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL)
+      {
         rgb_matrix_set_color(index, 0, val, 0);
-      } else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24)
-                 || (keycode >= KC_RIGHT && keycode <= KC_UP)
-                 || keycode == KC_HOME || keycode == KC_END) {
+      }
+      else if ((keycode >= KC_F1 && keycode <= KC_F12) || (keycode >= KC_F13 && keycode <= KC_F24) || (keycode >= KC_RIGHT && keycode <= KC_UP) || keycode == KC_HOME || keycode == KC_END)
+      {
         rgb_matrix_set_color(index, val, val, val);
-      } else {
+      }
+      else
+      {
         rgb_matrix_set_color(index, 0, 0, val);
       }
     }
@@ -224,17 +287,21 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 #endif
 
-bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record) {
+bool get_chordal_hold(uint16_t tap_hold_keycode, keyrecord_t* tap_hold_record, uint16_t other_keycode, keyrecord_t* other_record)
+{
     // allow ctrl+shift directly:
-    switch (tap_hold_keycode) {
+    switch (tap_hold_keycode)
+    {
         case MT_CTL_ESC:
-            if (other_keycode == KC_LSFT) {
+            if (other_keycode == KC_LSFT)
+            {
                 return true;
             }
             break;
 
         case MT_CTL_MIN:
-            if (other_keycode == KC_RSFT) {
+            if (other_keycode == KC_RSFT)
+            {
                 return true;
             }
             break;
