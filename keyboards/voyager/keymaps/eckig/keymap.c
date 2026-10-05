@@ -130,20 +130,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       mouse_layer_off();
     }
   }
-
-  // Adaptive auto mouse timeout: short after a click (so typing works soon),
-  // long after scrolling (read, then scroll again).
-  if (!record->event.pressed)
-  {
-    if (keycode == DRAG_SCROLL)
-    {
-      set_auto_mouse_timeout(AUTO_MOUSE_TIME_SCROLL);
-    }
-    else if (IS_MOUSE_KEYCODE(keycode))
-    {
-      set_auto_mouse_timeout(AUTO_MOUSE_TIME_CLICK);
-    }
-  }
 #endif
 
   os_variant_t host = detected_host_os();
@@ -260,17 +246,6 @@ void matrix_scan_user(void)
 void keyboard_post_init_user(void)
 {
   set_auto_mouse_enable(true);
-}
-
-// Pointer movement restores the default timeout. During drag scroll the
-// navigator module has already converted x/y into scroll, so this doesn't fire.
-report_mouse_t pointing_device_task_user(report_mouse_t mouse_report)
-{
-  if (mouse_report.x != 0 || mouse_report.y != 0)
-  {
-    set_auto_mouse_timeout(AUTO_MOUSE_TIME);
-  }
-  return mouse_report;
 }
 
 // Keys that keep the auto mouse layer active instead of leaving it
