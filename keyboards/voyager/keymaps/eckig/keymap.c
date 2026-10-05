@@ -23,7 +23,8 @@ enum custom_keycodes {
   CX_BSLS,
   CX_EURO,
   CX_TILD,
-  CX_PIPE
+  CX_PIPE,
+  MS_ON
 };
 
 #define LT1_ENTER  LT(1,KC_ENTER)
@@ -49,7 +50,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 {
   //base
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_F5,   KC_F6,      KC_F7,      KC_F8,      KC_LGUI,      KC_RGUI,    KC_NO,      KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
+    MT_ALT_DLR, KC_F5,   KC_F6,      KC_F7,      KC_F8,      KC_LGUI,      KC_RGUI,    MS_ON,      KC_NO,   KC_NO,   KC_NO,   MT_ALT_EXC,
     KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,         KC_F,       KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
     KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,         KC_D,       KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
     MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,         KC_B,       KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
@@ -89,10 +90,47 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
   ),
 };
 
+#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+// Mouse layer switched on manually via MS_ON: no timeout, ends on the first non-mouse key.
+static bool mouse_layer_manual = false;
+
+static void mouse_layer_off(void)
+{
+  mouse_layer_manual = false;
+  set_auto_mouse_toggled(false);
+  auto_mouse_reset_trigger(true); // reset tracking, short delay before trackball can re-activate
+  layer_off(AUTO_MOUSE_DEFAULT_LAYER);
+}
+#endif
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record)
 {
 
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+  if (record->event.pressed)
+  {
+    if (keycode == MS_ON)
+    {
+      mouse_layer_manual = true;
+      set_auto_mouse_toggled(true); // blocks the timeout
+      layer_on(AUTO_MOUSE_DEFAULT_LAYER);
+      return false;
+    }
+    // Esc tap on the mouse layer: cancel the layer, don't send Esc (hold stays Ctrl).
+    if (keycode == MT_CTL_ESC && record->tap.count > 0 && layer_state_is(AUTO_MOUSE_DEFAULT_LAYER))
+    {
+      mouse_layer_off();
+      return false;
+    }
+    // Manual mode ends on the first non-mouse key, which is then typed normally.
+    // Held mod-taps act as modifiers and keep the layer (e.g. Ctrl+click).
+    bool is_mod_tap_hold = IS_QK_MOD_TAP(keycode) && record->tap.count == 0;
+    if (mouse_layer_manual && !is_mod_tap_hold && !is_mouse_record_user(keycode, record))
+    {
+      mouse_layer_off();
+    }
+  }
+
   // Adaptive auto mouse timeout: short after a click (so typing works soon),
   // long after scrolling (read, then scroll again).
   if (!record->event.pressed)
@@ -238,7 +276,7 @@ report_mouse_t pointing_device_task_user(report_mouse_t mouse_report)
 // Keys that keep the auto mouse layer active instead of leaving it
 bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record)
 {
-  if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL)
+  if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL || keycode == MS_ON)
   {
     return true;
   }
@@ -296,7 +334,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
       }
-      else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL)
+      else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL || keycode == MS_ON)
       {
         rgb_matrix_set_color(index, 0, val, 0);
       }
