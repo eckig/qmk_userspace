@@ -117,15 +117,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       layer_on(AUTO_MOUSE_DEFAULT_LAYER);
       return false;
     }
-    // Esc tap on the mouse layer: cancel the layer, don't send Esc (hold stays Ctrl).
-    if (keycode == MT_CTL_ESC && record->tap.count > 0 && layer_state_is(AUTO_MOUSE_DEFAULT_LAYER))
-    {
-      mouse_layer_off();
-      return false;
-    }
-    // Any non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
-    // The library only does this while the trackball is idle; we do it unconditionally.
-    // Held mod-taps act as modifiers and keep the layer (e.g. Ctrl+click).
+    // Any normal non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
     bool is_mod_tap_hold = IS_QK_MOD_TAP(keycode) && record->tap.count == 0;
     if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER) && !is_mod_tap_hold && !is_mouse_record_user(keycode, record))
     {
