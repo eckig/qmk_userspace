@@ -123,10 +123,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       mouse_layer_off();
       return false;
     }
-    // Manual mode ends on the first non-mouse key, which is then typed normally.
+    // Any non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
+    // The library only does this while the trackball is idle; we do it unconditionally.
     // Held mod-taps act as modifiers and keep the layer (e.g. Ctrl+click).
     bool is_mod_tap_hold = IS_QK_MOD_TAP(keycode) && record->tap.count == 0;
-    if (mouse_layer_manual && !is_mod_tap_hold && !is_mouse_record_user(keycode, record))
+    if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER) && !is_mod_tap_hold && !is_mouse_record_user(keycode, record))
     {
       mouse_layer_off();
     }
