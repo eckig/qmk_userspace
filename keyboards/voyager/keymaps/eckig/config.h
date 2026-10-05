@@ -14,10 +14,9 @@
 
 #define NAVIGATOR_SCROLL_DIVIDER 50
 
-// Auto mouse layer: trackball movement activates layer 4, idle/typing leaves it.
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 4
-#define AUTO_MOUSE_TIME 1500 // ms idle before the layer turns off
+#define AUTO_MOUSE_TIME 1000 // ms idle before the layer turns off
 
 #define RGB_MATRIX_TIMEOUT 300000 // 5 min idle, in ms
 #define RGB_MATRIX_SLEEP
