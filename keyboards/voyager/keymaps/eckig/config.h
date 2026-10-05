@@ -17,7 +17,10 @@
 // Auto mouse layer: trackball movement activates layer 4, idle/typing leaves it.
 #define POINTING_DEVICE_AUTO_MOUSE_ENABLE
 #define AUTO_MOUSE_DEFAULT_LAYER 4
-#define AUTO_MOUSE_TIME 1000 // ms
+#define AUTO_MOUSE_TIME 1000 // ms, after pointer movement
+// Adaptive timeouts (set in keymap.c):
+#define AUTO_MOUSE_TIME_CLICK  350  // ms after releasing a mouse button (allows double/triple click)
+#define AUTO_MOUSE_TIME_SCROLL 3000 // ms after releasing DRAG_SCROLL (read, then scroll again)
 
 #define RGB_MATRIX_TIMEOUT 300000 // 5 min idle, in ms
 #define RGB_MATRIX_SLEEP
