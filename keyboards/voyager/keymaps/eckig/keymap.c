@@ -33,6 +33,7 @@ enum custom_keycodes
 #define LT2_SPACE  LT(2,KC_SPACE)
 #define LT2_BSPC   LT(2,KC_BSPC)
 #define LT3_C      LT(3,KC_C)
+#define LT5_BSPC   LT(SCROLL_LAYER,KC_BSPC) // mouse layer: tap = Backspace, hold = scroll
 #define MT_CTL_ESC MT(MOD_LCTL, KC_ESCAPE)
 #define MT_CTL_MIN MT(MOD_RCTL, DE_MINS)
 #define MT_ALT_DLR MT(MOD_LALT, MT_DLR)
@@ -87,7 +88,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_MS_BTN3, KC_MS_BTN2, KC_MS_BTN1, KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                                 DRAG_SCROLL,KC_TRNS,      KC_TRNS,    KC_TRNS
+                                                 LT5_BSPC,   KC_TRNS,      KC_TRNS,    KC_TRNS
+  ),
+  // drag scroll helper (empty): active while LT5_BSPC is held
+  [SCROLL_LAYER] = LAYOUT_voyager(
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+                                                 KC_TRNS,    KC_TRNS,      KC_TRNS,    KC_TRNS
   ),
 };
 
@@ -118,7 +127,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       return false;
     }
     // Any normal non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
-    bool is_mod_tap_hold = IS_QK_MOD_TAP(keycode) && record->tap.count == 0;
+    // Held LT5_BSPC is drag scroll and keeps the layer too; its tap (Backspace) leaves it.
+    bool is_mod_tap_hold = (IS_QK_MOD_TAP(keycode) || keycode == LT5_BSPC) && record->tap.count == 0;
     if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER) && !is_mod_tap_hold && !is_mouse_record_user(keycode, record))
     {
       mouse_layer_off();
@@ -264,7 +274,9 @@ bool is_mouse_record_user(uint16_t keycode, keyrecord_t *record)
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
 {
-  uint8_t layer = get_highest_layer(layer_state | default_layer_state);
+  // Ignore the empty scroll helper layer so the mouse layer stays lit while scrolling.
+  layer_state_t state = (layer_state | default_layer_state) & ~((layer_state_t)1 << SCROLL_LAYER);
+  uint8_t layer = get_highest_layer(state);
   uint8_t val   = rgb_matrix_get_val();
 
   for (uint8_t row = 0; row < MATRIX_ROWS; ++row)
@@ -293,7 +305,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
         // number pad: purple
         rgb_matrix_set_color(index, val / 2, 0, val);
       }
-      else if (keycode == RGB_VAD || keycode == RGB_VAI || keycode == CW_TOGG)
+      else if (keycode == RGB_VAD || keycode == RGB_VAI || keycode == CW_TOGG || keycode == ALT_TAB)
       {
         // settings keys: yellow
         rgb_matrix_set_color(index, val, val * 2 / 3, 0);
@@ -303,7 +315,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
         // middle button: lighter green to tell it apart from BTN1/BTN2
         rgb_matrix_set_color(index, val / 3, val, val / 3);
       }
-      else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL || keycode == MS_ON)
+      else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL || keycode == MS_ON || keycode == LT5_BSPC)
       {
         rgb_matrix_set_color(index, 0, val, 0);
       }
