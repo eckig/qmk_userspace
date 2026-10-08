@@ -102,6 +102,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 
 #ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
 // Mouse layer switched on manually via MS_ON: no timeout, ends on the first non-mouse key.
+// Pressing MS_ON while the mouse layer is on (manual or automatic) switches it off.
 static bool mouse_layer_manual = false;
 
 static void mouse_layer_off(void)
@@ -121,9 +122,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
   {
     if (keycode == MS_ON)
     {
-      mouse_layer_manual = true;
-      set_auto_mouse_toggled(true); // blocks the timeout
-      layer_on(AUTO_MOUSE_DEFAULT_LAYER);
+      if (layer_state_is(AUTO_MOUSE_DEFAULT_LAYER))
+      {
+        mouse_layer_off();
+      }
+      else
+      {
+        mouse_layer_manual = true;
+        set_auto_mouse_toggled(true); // blocks the timeout
+        layer_on(AUTO_MOUSE_DEFAULT_LAYER);
+      }
       return false;
     }
     // Any normal non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
