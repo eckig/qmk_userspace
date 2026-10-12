@@ -134,6 +134,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record)
       }
       return false;
     }
+    // Esc tap on the mouse layer: cancel the layer, don't send Esc (hold stays Ctrl).
+    if (keycode == MT_CTL_ESC && record->tap.count > 0 && layer_state_is(AUTO_MOUSE_DEFAULT_LAYER))
+    {
+      mouse_layer_off();
+      return false;
+    }
     // Any normal non-mouse key leaves the mouse layer (manual or automatic) and is then typed normally.
     // Held LT5_BSPC is drag scroll and keeps the layer too; its tap (Backspace) leaves it.
     bool is_mod_tap_hold = (IS_QK_MOD_TAP(keycode) || keycode == LT5_BSPC) && record->tap.count == 0;
