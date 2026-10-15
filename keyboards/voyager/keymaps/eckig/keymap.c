@@ -52,7 +52,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
 {
   //base
   [0] = LAYOUT_voyager(
-    MT_ALT_DLR, KC_F5,   KC_F6,      KC_F7,      KC_F8,      KC_LGUI,      KC_RGUI,    KC_NO,      KC_NO,   KC_NO,   MS_ON,   MT_ALT_EXC,
+    MT_ALT_DLR, KC_F5,   KC_F6,      KC_F7,      KC_F8,      KC_LGUI,      KC_RGUI,    DEMO,       KC_NO,   KC_NO,   MS_ON,   MT_ALT_EXC,
     KC_TAB,     DE_SCLN, KC_COMM,    KC_DOT,     KC_P,       DE_Y,         KC_F,       KC_G,       LT3_C,   KC_R,    KC_L,    DE_SLSH,
     KC_LSFT,    KC_A,    KC_O,       KC_E,       KC_U,       KC_I,         KC_D,       KC_H,       KC_T,    KC_N,    KC_S,    KC_RSFT,
     MT_CTL_ESC, DE_QUOT, KC_Q,       KC_J,       KC_K,       KC_X,         KC_B,       KC_M,       KC_W,    KC_V,    DE_Z,    MT_CTL_MIN,
@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] =
   ),
   // symbols
   [2] = LAYOUT_voyager(
-    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_PSCR,    DEMO,       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+    KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_PSCR,    KC_TRNS,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
     KC_TRNS,    DE_DEG,  KC_NO,      KC_NO,      KC_NO,      DE_GRV,       DE_AMPR,    CX_LBRC,    CX_RBRC, CX_EURO, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_CIRC, CX_BSLS,    DE_PLUS,    DE_EQL,     DE_HASH,      CX_PIPE,    DE_LPRN,    DE_RPRN, DE_PERC, KC_NO,   KC_TRNS,
     KC_TRNS,    DE_SECT, KC_NO,      DE_ASTR,    KC_NO,      KC_NO,        CX_TILD,    CX_LCBR,    CX_RCBR, CX_AT,   KC_NO,   KC_TRNS,
