@@ -305,6 +305,19 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
 
       uint16_t keycode = keymap_key_to_keycode(layer, (keypos_t){.col = col, .row = row});
 
+#ifdef POINTING_DEVICE_AUTO_MOUSE_ENABLE
+      // Mouse layer active: highlight the keys that leave it (MS_ON, Esc tap) in the settings color (yellow).
+      if (layer == AUTO_MOUSE_DEFAULT_LAYER && keycode == KC_TRNS)
+      {
+        uint16_t base = keymap_key_to_keycode(0, (keypos_t){.col = col, .row = row});
+        if (base == MS_ON || base == MT_CTL_ESC)
+        {
+          rgb_matrix_set_color(index, val, val * 2 / 3, 0);
+          continue;
+        }
+      }
+#endif
+
       if (keycode == KC_TRNS || keycode == KC_NO)
       {
         rgb_matrix_set_color(index, 0, 0, 0);
@@ -323,11 +336,6 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max)
       {
         // settings keys: yellow
         rgb_matrix_set_color(index, val, val * 2 / 3, 0);
-      }
-      else if (keycode == KC_MS_BTN3)
-      {
-        // middle button: lighter green to tell it apart from BTN1/BTN2
-        rgb_matrix_set_color(index, val / 3, val, val / 3);
       }
       else if (IS_MOUSE_KEYCODE(keycode) || keycode == DRAG_SCROLL || keycode == MS_ON || keycode == LT5_BSPC)
       {
